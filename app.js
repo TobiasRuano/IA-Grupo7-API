@@ -12,6 +12,7 @@ var cors = require('cors');
 //importo router
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var turnosRouter = require('./routes/turnos');
 var apiRouter = require('./routes/api'); //Custom
 var utilRouter = require('./routes/utils');
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', apiRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/turnos', turnosRouter);
 app.use('/utils/',utilRouter);
 
 //onsole.log("processENV",process.env);
