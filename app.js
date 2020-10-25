@@ -2,12 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var logger = require('morgan'); 
 var bluebird = require('bluebird');
 var fs = require('fs');
 
 //incorporo cors
-var cors = require('cors');
+var cors = require('cors'); 
 
 //importo router
 var indexRouter = require('./routes/index');
@@ -15,6 +15,7 @@ var usersRouter = require('./routes/users');
 var turnosRouter = require('./routes/turnos');
 var apiRouter = require('./routes/api'); //Custom
 var utilRouter = require('./routes/utils');
+var recetaRouter= require('./routes/recetas');
 
 //instancio el servidor
 var app = express();
@@ -39,8 +40,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/turnos', turnosRouter);
 app.use('/utils/',utilRouter);
+app.use('/recetas/', recetaRouter);
 
-//onsole.log("processENV",process.env);
+//console.log("processENV",process.env);
 if (process.env.NODE_ENV === 'Development') {
   require('./config').config();
 }
