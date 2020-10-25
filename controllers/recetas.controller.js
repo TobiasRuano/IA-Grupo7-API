@@ -1,4 +1,4 @@
-var UserService = require('../services/receta.service');
+var RecetaService = require('../services/receta.service');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -10,7 +10,7 @@ exports.getRecetas = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     try {
-        var Recetas = await UserService.getRecetas({}, page, limit)
+        var Recetas = await RecetaService.getRecetas({}, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: Users, message: "Succesfully Recetas Recieved"});
     } catch (e) {
@@ -31,7 +31,7 @@ exports.createReceta= async function (req, res, next) {
     }
     try {
         // Calling the Service function with the new object from the Request Body
-        var createdReceta= await RecetaService.createReceta(Turno)
+        var createdReceta= await RecetaService.createReceta(Receta)
         return res.status(201).json({createdReceta, message: "Succesfully Created Receta"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
@@ -44,7 +44,7 @@ exports.removeReceta = async function (req, res, next) {
 
     var id = req.params.id;
     try {
-        var deleted = await UserService.deleteReceta(id);
+        var deleted = await RecetaService.deleteReceta(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message})

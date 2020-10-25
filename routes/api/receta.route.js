@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var UserController = require('../../controllers/recetas.controller');
+var RecetaController = require('../../controllers/recetas.controller');
 var Authorization = require('../../auth/authorization');
 
 
@@ -10,9 +10,9 @@ router.get('/test', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/recetas.routes');
 });
 
-router.post('/recetas', UserController.createReceta)
+router.post('/recetas', RecetaController.createReceta)
 
-router.delete('/:id', Authorization, UserController.removeReceta)
+router.delete('/:id', Authorization, RecetaController.removeReceta)
 
 //subir imagen/archivo
 
