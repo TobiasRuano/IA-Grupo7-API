@@ -7,7 +7,8 @@ var TurnoSchema = new mongoose.Schema({
     razon: String,
     fecha: Date,
     dniMedico: Number,
-    estado: String
+    estado: String,
+    userID: Number
 })
 
 TurnoSchema.plugin(mongoosePaginate)

@@ -10,23 +10,27 @@ exports.getTurnos = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
     try {
-        var Users = await UserService.getUsers({}, page, limit)
+        var Turnos = await TurnoService.getTurnos({}, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
+        return res.status(200).json({status: 200, data: Turnos, message: "Succesfully Turnos Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
     }
 }
+
+// ESTA ES LA FUNCION QUE NO DETECTA EL PARAMETRO DE FILTRO
 exports.getTurnosbyID = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {id: req.body.id}
+    let filtro= {userID: req.body.user} //TODO: no detecta el id del usuario a buscar
+    console.log("Este es el valor de userID: ")
+    console.log(filtro)
     try {
         var Turnos = await TurnoService.getTurnos(filtro, page, limit)
-        // Return the Users list with the appropriate HTTP password Code and Message.
+        // Return the Turnos list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: Turnos, message: "Succesfully Turnos Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
@@ -39,6 +43,7 @@ exports.createTurno = async function (req, res, next) {
     console.log("llegue al controller, ha crear un turno!",req.body)
     var Turno = {
         id: req.body.id,
+        userID: req.body.userID,
         razon: req.body.razon,
         fecha: req.body.fecha,
         dniMedico: req.body.dniMedico,
@@ -55,23 +60,20 @@ exports.createTurno = async function (req, res, next) {
     }
 }
 
-exports.updateUser = async function (req, res, next) {
+exports.updateTurnoState = async function (req, res, next) {
 
     // Id is necessary for the update
-    if (!req.body.name) {
-        return res.status(400).json({status: 400., message: "Name be present"})
+    if (!req.body.estado) {
+        return res.status(400).json({status: 400., message: "No hay un estado para actualizar"})
     }
-
     
-    var User = {
-       
-        name: req.body.name ? req.body.name : null,
-        email: req.body.email ? req.body.email : null,
-        password: req.body.password ? req.body.password : null
+    var Turno = {
+        id: req.body.id ? req.body.id : null,
+        estado: req.body.estado ? req.body.estado : null
     }
     try {
-        var updatedUser = await UserService.updateUser(User)
-        return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
+        var updatedTurno = await TurnoService.updateTurnoState(Turno)
+        return res.status(200).json({status: 200, data: updatedTurno, message: "Succesfully Updated Turno"})
     } catch (e) {
         return res.status(400).json({status: 400., message: e.message})
     }
