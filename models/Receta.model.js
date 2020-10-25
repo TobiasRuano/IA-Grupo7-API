@@ -10,7 +10,7 @@ var RecetaSchema = new mongoose.Schema({
     //imagen: de la receta
 })
 
-TurnoSchema.plugin(mongoosePaginate)
+RecetaSchema.plugin(mongoosePaginate)
 const Receta = mongoose.model('Receta', RecetaSchema)
 
 module.exports = Receta;

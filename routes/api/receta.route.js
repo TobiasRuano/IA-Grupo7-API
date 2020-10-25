@@ -10,7 +10,7 @@ router.get('/test', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/recetas.routes');
 });
 
-router.post('/recetas', RecetaController.createReceta)
+router.post('/nuevareceta', RecetaController.createReceta)
 
 router.delete('/:id', Authorization, RecetaController.removeReceta)
 

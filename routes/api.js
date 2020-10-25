@@ -8,6 +8,6 @@ var recetas = require('./api/receta.route.js')
 
 router.use('/users', users);
 router.use('/turnos', turnos);
-route.use('/recetas',recetas);
+router.use('/recetas',recetas);
 
 module.exports = router;
