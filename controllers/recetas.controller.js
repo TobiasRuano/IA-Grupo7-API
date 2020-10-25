@@ -4,15 +4,17 @@ var RecetaService = require('../services/receta.service');
 _this = this;
 
 // Async Controller function to get the To do List
-exports.getRecetas = async function (req, res, next) {
+exports.getRecetasByID = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
+    let filtro = {userID: req.body.userID}
+    console.log(filtro)
     try {
-        var Recetas = await RecetaService.getRecetas({}, page, limit)
+        var Recetas = await RecetaService.getRecetas(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
-        return res.status(200).json({status: 200, data: Users, message: "Succesfully Recetas Recieved"});
+        return res.status(200).json({status: 200, data: Recetas, message: "Succesfully Recetas Recieved"});
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         return res.status(400).json({status: 400, message: e.message});
@@ -27,7 +29,8 @@ exports.createReceta= async function (req, res, next) {
         id: req.body.id,
         fecha: req.body.fecha,
         nombreMedico: req.body.nombreMedico,
-        comentario: req.body.comentario
+        comentario: req.body.comentario,
+        userID: req.body.userID
     }
     try {
         // Calling the Service function with the new object from the Request Body
@@ -50,25 +53,3 @@ exports.removeReceta = async function (req, res, next) {
         return res.status(400).json({status: 400, message: e.message})
     }
 }
-
-// exports.updateUser = async function (req, res, next) {
-
-//     // Id is necessary for the update
-//     if (!req.body.name) {
-//         return res.status(400).json({status: 400., message: "Name be present"})
-//     }
-
-    
-//     var User = {
-       
-//         name: req.body.name ? req.body.name : null,
-//         email: req.body.email ? req.body.email : null,
-//         password: req.body.password ? req.body.password : null
-//     }
-//     try {
-//         var updatedUser = await UserService.updateUser(User)
-//         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
-//     } catch (e) {
-//         return res.status(400).json({status: 400., message: e.message})
-//     }
-// } // Esto es user hay que modificar para receta.

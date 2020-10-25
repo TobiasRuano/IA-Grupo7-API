@@ -5,13 +5,12 @@ var Authorization = require('../../auth/authorization');
 
 
 // Authorize each API with middleware and map to the Controller Functions
-/* GET users listing. */
 router.get('/test', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/recetas.routes');
 });
 
 router.post('/nuevareceta', RecetaController.createReceta)
-
+router.post('/misrecetas', Authorization, RecetaController.getRecetasByID)
 router.delete('/:id', Authorization, RecetaController.removeReceta)
 
 //subir imagen/archivo
@@ -22,9 +21,3 @@ router.delete('/:id', Authorization, RecetaController.removeReceta)
 
 // Export the Router
 module.exports = router;
-
-
-
-//api/users
-//api/users/registration
-//api/users/login

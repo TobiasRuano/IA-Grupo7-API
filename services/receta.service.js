@@ -37,6 +37,7 @@ exports.createReceta = async function (receta) {
         fecha: new Date(),
         nombreMedico: receta.nombreMedico,
         comentario: receta.comentario,
+        userID: receta.userID
         //imagenReceta:receta.imagenReceta
 
     })

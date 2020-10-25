@@ -19,14 +19,12 @@ exports.getTurnos = async function (req, res, next) {
     }
 }
 
-// ESTA ES LA FUNCION QUE NO DETECTA EL PARAMETRO DE FILTRO
 exports.getTurnosbyID = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {userID: req.body.user} //TODO: no detecta el id del usuario a buscar
-    console.log("Este es el valor de userID: ")
+    let filtro= {userID: req.body.userID}
     console.log(filtro)
     try {
         var Turnos = await TurnoService.getTurnos(filtro, page, limit)

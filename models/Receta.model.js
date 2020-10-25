@@ -6,7 +6,8 @@ var RecetaSchema = new mongoose.Schema({
     id: String,
     fecha: Date,
     nombreMedico:String,
-    comentario: String
+    comentario: String,
+    userID: Number
     //imagen: de la receta
 })
 
