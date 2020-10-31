@@ -16,6 +16,7 @@ var turnosRouter = require('./routes/turnos');
 var apiRouter = require('./routes/api'); //Custom
 var utilRouter = require('./routes/utils');
 var recetaRouter= require('./routes/recetas');
+var historiaclinicaRouter= require('./routes/historiaclinica');
 
 //instancio el servidor
 var app = express();
@@ -41,6 +42,8 @@ app.use('/users', usersRouter);
 app.use('/turnos', turnosRouter);
 app.use('/utils/',utilRouter);
 app.use('/recetas/', recetaRouter);
+app.use('/historiaclinica/', recetaRouter);
+
 
 //console.log("processENV",process.env);
 if (process.env.NODE_ENV === 'Development') {
