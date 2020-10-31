@@ -34,13 +34,13 @@ exports.createUser = async function (user) {
     var newUser = new User({
         name: user.name,
         email: user.email,
-        date: new Date(),
+        creationDate: new Date(),
         password: hashedPassword,
         permiso: user.permiso,
         dni: user.dni,
         surname: user.surname,
         sexo: user.sexo,
-        fechaNac: new Date(),
+        fechaNac: user.fechaNac,
         domicilio: user.domicilio,
         telefono: user.telefono,
     })
