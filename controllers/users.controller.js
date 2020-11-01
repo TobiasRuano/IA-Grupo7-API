@@ -19,12 +19,12 @@ exports.getUsers = async function (req, res, next) {
         return res.status(400).json({status: 400, message: e.message});
     }
 }
-exports.getUsersByMail = async function (req, res, next) {
+exports.getUsersByDni = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {email: req.body.email}
+    let filtro= {dni: req.body.dni}
     try {
         var Users = await UserService.getUsers(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
