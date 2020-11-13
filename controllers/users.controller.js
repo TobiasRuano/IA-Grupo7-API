@@ -35,6 +35,20 @@ exports.getUsersByDni = async function (req, res, next) {
     }
 }
 
+exports.getMedicos = async function (req, res, next) {
+    var page = req.query.page ? req.query.page : 1
+    var limit = req.query.limit ? req.query.limit : 20;
+    let filtro= {dni: req.body.dni, permiso: 2}
+    try {
+        var Medicos = await UserService.getUsers(filtro, page, limit)
+        // Return the Users list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: Medicos, message: "Medicos Recibidos"});
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+
 exports.createUser = async function (req, res, next) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller",req.body)

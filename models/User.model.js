@@ -12,7 +12,7 @@ var UserSchema = new mongoose.Schema({
     domicilio: String,
     telefono: Number,
     password: String,
-    permiso: String
+    permiso: Number
 })
 
 UserSchema.plugin(mongoosePaginate)
