@@ -28,51 +28,28 @@ exports.getTurnos = async function (query, page, limit) {
     }
 }
 
-exports.createTurno = async function (turno) {
+exports.createTurnos = async function (arrayTurnos) {
 
-    var hashedID = bcrypt.hashSync(turno.id, 8);
-    
-    var newTurno = new Turno({
-        id: hashedID,
-        userID: turno.userID,
-        razon: turno.razon,
-        fecha: new Date(), // TODO: castear la fecha al formato correspondiente antes de aca
-        dniMedico: turno.dniMedico,
-        estado: turno.estado
-    })
+    for (i = 0; i < arrayTurnos.length; i++) { 
+        var hashedID = bcrypt.hashSync(turno.id, 8);
+        var newTurno = new Turno({
+            id: hashedID,
+            userID: arrayTurnos[i].userID,
+            razon: arrayTurnos[i].razon,
+            fecha: arrayTurnos[i].fecha,
+            dniMedico: arrayTurnos[i].dniMedico,
+            estado: arrayTurnos[i].estado
+        })
 
-    try {
-        // Saving the Turno 
-        var savedTurno = await newTurno.save();
-        return true;
-    } catch (e) {
-        // return a Error message describing the reason 
-        console.log(e)    
-        throw Error("Error while Creating Turno")
-    }
-}
-
-exports.updateTurnoState = async function (turno) {
-    
-    var id = {estado :turno.id}
-
-    try {
-        //Find the old User Object by the Id
-        var oldTurno = await Turno.findOne(id);
-    } catch (e) {
-        throw Error("Error occured while Finding the Turno")
-    }
-    // If no old Turno Object exists return false
-    if (!oldTurno) {
-        return false;
-    }
-    //Edit the Turno Object
-    oldTurno.estado = turno.estado
-    try {
-        var savedTurno = await oldTurno.save()
-        return savedTurno;
-    } catch (e) {
-        throw Error("And Error occured while updating the Turno");
+        try {
+            // Saving the Turno 
+            var savedTurno = await newTurno.save();
+            return true;
+        } catch (e) {
+            // return a Error message describing the reason 
+            console.log(e)    
+            throw Error("Error al crear el Turno")
+        }
     }
 }
 

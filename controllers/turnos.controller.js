@@ -36,7 +36,7 @@ exports.getTurnosbyID = async function (req, res, next) {
     }
 }
 
-exports.createTurno = async function (req, res, next) {
+exports.asignarTurno = async function (req, res, next) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller, ha crear un turno!",req.body)
     var Turno = {
@@ -49,7 +49,7 @@ exports.createTurno = async function (req, res, next) {
     }
     try {
         // Calling the Service function with the new object from the Request Body
-        var createdTurno = await TurnoService.createTurno(Turno)
+        var createdTurno = await TurnoService.createTurnos(Turno)
         return res.status(201).json({createdTurno, message: "Succesfully Created Turno"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
@@ -58,22 +58,39 @@ exports.createTurno = async function (req, res, next) {
     }
 }
 
-exports.updateTurnoState = async function (req, res, next) {
+exports.generarTurnos = async function (req, res, next) {
+    var fecha = req.body.fecha;
+    var dniMedico = req.body.dniMedico;
+    let arrayTurnos = [];
 
-    // Id is necessary for the update
-    if (!req.body.estado) {
-        return res.status(400).json({status: 400., message: "No hay un estado para actualizar"})
+    //Creo todos los turnos de 9 a 18 en el dia dado.
+    let hour = 9;
+    let minute = 0;
+    for (let index = 0; index < 18; index++) {
+        var Turno = {
+            userID: "",
+            razon: "",
+            fecha: new Date(fecha.getFullYear, fecha.getMonth, fecha.getDate, hour, minute),
+            dniMedico: dniMedico,
+            estado: "Disponible"
+        }
+        arrayTurnos.push(Turno);
+        if (minute == 0) {
+            minute = minute + 30;
+        } else {
+            minute = 0;
+            hour = hour + 1;
+        }
     }
     
-    var Turno = {
-        id: req.body.id ? req.body.id : null,
-        estado: req.body.estado ? req.body.estado : null
-    }
     try {
-        var updatedTurno = await TurnoService.updateTurnoState(Turno)
-        return res.status(200).json({status: 200, data: updatedTurno, message: "Succesfully Updated Turno"})
+        // Calling the Service function with the new object from the Request Body
+        var createdTurnos = await TurnoService.createTurnos(arrayTurnos)
+        return res.status(201).json({createdTurno: createdTurnos, message: "Turnos creados correctamente"})
     } catch (e) {
-        return res.status(400).json({status: 400., message: e.message})
+        //Return an Error Response Message with Code and the Error Message.
+        console.log(e)
+        return res.status(400).json({status: 400, message: "Error en la cracion de turnos"})
     }
 }
 
