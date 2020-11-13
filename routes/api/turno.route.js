@@ -8,7 +8,7 @@ var Authorization = require('../../auth/authorization');
 router.get('/test', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/turnos.routes');
 });
-router.post('crearturnos', TurnoController.generarTurnos)
+router.post('/crearturnos', TurnoController.generarTurnos)
 router.put('/asignarturno', TurnoController.asignarTurno)
 router.get('/', Authorization, TurnoController.getTurnos)
 router.post('/misturnos', Authorization, TurnoController.getTurnosbyID)
