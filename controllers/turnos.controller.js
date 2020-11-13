@@ -86,7 +86,10 @@ exports.generarTurnos = async function (req, res, next) {
     
     try {
         // Calling the Service function with the new object from the Request Body
-        var createdTurnos = await TurnoService.createTurnos(arrayTurnos)
+        let createdTurnos = [];
+        for (let index = 0; index < arrayTurnos.length; index++) {
+            createdTurnos.push(await TurnoService.createTurnos(arrayTurnos[index]));
+        }
         return res.status(201).json({createdTurno: createdTurnos, message: "Turnos creados correctamente"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
