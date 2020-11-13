@@ -71,7 +71,7 @@ exports.generarTurnos = async function (req, res, next) {
     for (let index = 0; index < 18; index++) {
         console.log(fecha.getFullYear);
         console.log(fecha.getMonth);
-        var fechaTurno = new Date(fecha.getFullYear, fecha.getMonth, fecha.getDate, hour, minute);
+        var fechaTurno = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), hour, minute);
         var Turno = {
             userID: "",
             razon: "",
