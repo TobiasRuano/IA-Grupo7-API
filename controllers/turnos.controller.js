@@ -59,7 +59,7 @@ exports.asignarTurno = async function (req, res, next) {
 }
 
 exports.generarTurnos = async function (req, res, next) {
-    var fecha = req.body.fecha;
+    var fecha = new Date(req.body.fecha);
     var dniMedico = req.body.dniMedico;
     let arrayTurnos = [];
 
