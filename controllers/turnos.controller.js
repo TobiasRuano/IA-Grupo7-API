@@ -66,6 +66,8 @@ exports.generarTurnos = async function (req, res, next) {
     //Creo todos los turnos de 9 a 18 en el dia dado.
     let hour = 9;
     let minute = 0;
+    console.log("esta es la fecha que viene del front: ");
+    console.log(fecha);
     for (let index = 0; index < 18; index++) {
         console.log(fecha.getFullYear);
         console.log(fecha.getMonth);
