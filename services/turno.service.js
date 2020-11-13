@@ -40,7 +40,7 @@ exports.createTurnos = async function (arrayTurnos) {
         })
 
         try {
-            // Saving the Turno 
+            // Guardando el turno
             var savedTurno = await newTurno.save();
             return true;
         } catch (e) {
@@ -50,6 +50,7 @@ exports.createTurnos = async function (arrayTurnos) {
             throw Error("Error al crear el Turno")
         }
     }
+    return true;
 }
 
 exports.deleteTurno = async function (id) {
