@@ -25,7 +25,6 @@ exports.createHistoriaClinica = async function (req, res, next) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller, a crear una HistoriaClinica",req.body)
     var HistoriaClinica = {
-        id: req.body.id,
         motivo: req.body.motivo,
         gruposang: req.body.gruposang,
         cardiaco: req.body.cardiaco,
