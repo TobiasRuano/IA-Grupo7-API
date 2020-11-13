@@ -28,29 +28,26 @@ exports.getTurnos = async function (query, page, limit) {
     }
 }
 
-exports.createTurnos = async function (arrayTurnos) {
+exports.createTurno = async function (turno) {
 
-    for (i = 0; i < arrayTurnos.length; i++) { 
-        var newTurno = new Turno({
-            userID: arrayTurnos[i].userID,
-            razon: arrayTurnos[i].razon,
-            fecha: arrayTurnos[i].fecha,
-            dniMedico: arrayTurnos[i].dniMedico,
-            estado: arrayTurnos[i].estado
-        })
+    var newTurno = new Turno({
+        userID: turno.userID,
+        razon: turno.razon,
+        fecha: turno.fecha,
+        dniMedico: turno.dniMedico,
+        estado: turno.estado
+    })
 
-        try {
-            // Guardando el turno
-            var savedTurno = await newTurno.save();
-            return true;
-        } catch (e) {
-            // return a Error message describing the reason 
-            console.log(e)
-            console.log("Turno service dice: error al crear un turno")
-            throw Error("Error al crear el Turno")
-        }
+    try {
+        // Guardando el turno
+        var savedTurno = await newTurno.save();
+        return true;
+    } catch (e) {
+        // return a Error message describing the reason 
+        console.log(e)
+        console.log("Turno service dice: error al crear un turno")
+        throw Error("Error al crear el Turno")
     }
-    return true;
 }
 
 exports.deleteTurno = async function (id) {

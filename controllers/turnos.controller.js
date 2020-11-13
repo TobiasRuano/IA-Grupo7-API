@@ -49,7 +49,7 @@ exports.asignarTurno = async function (req, res, next) {
     }
     try {
         // Calling the Service function with the new object from the Request Body
-        var createdTurno = await TurnoService.createTurnos(Turno)
+        var createdTurno = await TurnoService.createTurno(Turno)
         return res.status(201).json({createdTurno, message: "Succesfully Created Turno"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
@@ -88,7 +88,7 @@ exports.generarTurnos = async function (req, res, next) {
         // Calling the Service function with the new object from the Request Body
         let createdTurnos = [];
         for (let index = 0; index < arrayTurnos.length; index++) {
-            createdTurnos.push(await TurnoService.createTurnos(arrayTurnos[index]));
+            createdTurnos.push(await TurnoService.createTurno(arrayTurnos[index]));
         }
         return res.status(201).json({createdTurno: createdTurnos, message: "Turnos creados correctamente"})
     } catch (e) {
