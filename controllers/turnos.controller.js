@@ -66,6 +66,7 @@ exports.generarTurnos = async function (req, res, next) {
     //Creo todos los turnos de 9 a 18 en el dia dado.
     let hour = 9;
     let minute = 0;
+    console.log(fecha);
     for (let index = 0; index < 18; index++) {
         var Turno = {
             userID: "",
