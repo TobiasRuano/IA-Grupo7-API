@@ -38,7 +38,7 @@ exports.getUsersByDni = async function (req, res, next) {
 exports.getMedicos = async function (req, res, next) {
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 20;
-    let filtro= {dni: req.body.dni, permiso: 2}
+    let filtro= {permiso: 2}
     try {
         var Medicos = await UserService.getUsers(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
