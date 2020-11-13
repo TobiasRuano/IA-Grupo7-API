@@ -31,7 +31,7 @@ exports.getTurnos = async function (query, page, limit) {
 exports.createTurnos = async function (arrayTurnos) {
 
     for (i = 0; i < arrayTurnos.length; i++) { 
-        var hashedID = bcrypt.hashSync(turno.id, 8);
+        var hashedID = bcrypt.hashSync(arrayTurnos[i].id, 8);
         var newTurno = new Turno({
             id: hashedID,
             userID: arrayTurnos[i].userID,
