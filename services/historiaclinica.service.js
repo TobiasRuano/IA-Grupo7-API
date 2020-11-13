@@ -32,7 +32,6 @@ exports.createHistoriaClinica = async function (historiaclinica) {
     var hashedIdr = bcrypt.hashSync(historiaclinica.id, 8);
     
     var newHistoriaClinica = new HistoriaClinica({
-        id: historiaclinica.id,
         motivo: historiaclinica.motivo,
         gruposang: historiaclinica.gruposang,
         cardiaco: historiaclinica.cardiaco,
