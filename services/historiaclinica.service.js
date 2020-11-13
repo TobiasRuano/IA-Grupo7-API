@@ -1,5 +1,5 @@
 // Gettign the Newly created Mongoose Model we just created 
-var Receta = require('../models/HistoriaClinica.model');
+var HistoriaClinica = require('../models/HistoriaClinica.model');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
@@ -32,6 +32,7 @@ exports.createHistoriaClinica = async function (historiaclinica) {
     var hashedIdr = bcrypt.hashSync(historiaclinica.id, 8);
     
     var newHistoriaClinica = new HistoriaClinica({
+        id: historiaclinica.id,
         motivo: historiaclinica.motivo,
         gruposang: historiaclinica.gruposang,
         cardiaco: historiaclinica.cardiaco,

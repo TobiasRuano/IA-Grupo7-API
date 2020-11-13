@@ -42,7 +42,7 @@ app.use('/users', usersRouter);
 app.use('/turnos', turnosRouter);
 app.use('/utils/',utilRouter);
 app.use('/recetas/', recetaRouter);
-app.use('/historiaclinica/', recetaRouter);
+app.use('/historiaclinica/', historiaclinicaRouter);
 
 
 //console.log("processENV",process.env);
