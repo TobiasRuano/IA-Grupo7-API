@@ -47,7 +47,8 @@ exports.createTurnos = async function (arrayTurnos) {
             return true;
         } catch (e) {
             // return a Error message describing the reason 
-            console.log(e)    
+            console.log(e)
+            console.log("Turno service dice: error al crear un turno")
             throw Error("Error al crear el Turno")
         }
     }

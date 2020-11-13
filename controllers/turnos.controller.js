@@ -90,7 +90,7 @@ exports.generarTurnos = async function (req, res, next) {
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "Error en la cracion de turnos"})
+        return res.status(400).json({status: 400, message: "TurnosController dice: Error en la cracion de turnos"})
     }
 }
 
