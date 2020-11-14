@@ -23,7 +23,7 @@ exports.getTurnosbyID = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
+    var limit = req.query.limit ? req.query.limit : 20;
     let filtro= {userID: req.body.userID}
     console.log(filtro)
     try {
@@ -37,8 +37,6 @@ exports.getTurnosbyID = async function (req, res, next) {
 }
 
 exports.asignarTurno = async function (req, res, next) {
-    // Req.Body contains the form submit values.
-    console.log("llegue al controller, ha crear un turno!",req.body)
     var Turno = {
         id: req.body.id,
         userID: req.body.userID,
@@ -48,13 +46,11 @@ exports.asignarTurno = async function (req, res, next) {
         estado: req.body.estado
     }
     try {
-        // Calling the Service function with the new object from the Request Body
-        var createdTurno = await TurnoService.createTurno(Turno)
-        return res.status(201).json({createdTurno, message: "Succesfully Created Turno"})
+        var createdTurno = await TurnoService.actualizarTurno(Turno)
+        return res.status(201).json({createdTurno, message: "Turno Actualizado Correctamente"})
     } catch (e) {
-        //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "Turno Creation was Unsuccesfull"})
+        return res.status(400).json({status: 400, message: "Error en la actualizacion del turno"})
     }
 }
 
@@ -99,12 +95,19 @@ exports.generarTurnos = async function (req, res, next) {
 }
 
 exports.cancelarTurno = async function (req, res, next) {
-
-    var id = req.params.id;
+    var Turno = {
+        id: req.body.id,
+        userID: "",
+        razon: "",
+        fecha: req.body.fecha,
+        dniMedico: req.body.dniMedico,
+        estado: "disponible"
+    }
     try {
-        var deleted = await TurnoService.deleteTurno(id);
-        res.status(200).send("Succesfully Deleted... ");
+        var createdTurno = await TurnoService.actualizarTurno(Turno)
+        return res.status(201).json({createdTurno, message: "Turno Actualizado Correctamente"})
     } catch (e) {
-        return res.status(400).json({status: 400, message: e.message})
+        console.log(e)
+        return res.status(400).json({status: 400, message: "Error en la actualizacion del turno"})
     }
 }

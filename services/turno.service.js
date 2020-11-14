@@ -44,15 +44,36 @@ exports.createTurno = async function (turno) {
         return true;
     } catch (e) {
         // return a Error message describing the reason 
-        console.log(e)
-        console.log("Turno service dice: error al crear un turno")
         throw Error("Error al crear el Turno")
     }
 }
 
-exports.deleteTurno = async function (id) {
+exports.actualizarTurno = async function (turno) {
+    var id = {id :turno.id}
 
-    // Delete the User
+    try {
+        var oldTurno = await Turno.findOne(id);
+    } catch (e) {
+        throw Error("Error al intentar encontrar el turno")
+    }
+    if (!oldTurno) {
+        return false;
+    }
+    oldTurno.id = turno.id
+    oldTurno.razon = turno.razon
+    oldTurno.fecha = turno.fecha
+    oldTurno.dniMedico = turno.dniMedico
+    oldTurno.estado = turno.estado
+    oldTurno.userID = turno.userID
+    try {
+        var savedTurno = await oldTurno.save()
+        return savedTurno;
+    } catch (e) {
+        throw Error("Error al intentar guardar el nuevo turno");
+    }
+}
+
+exports.deleteTurno = async function (id) {
     try {
         var deleted = await Turno.remove({
             _id: id
