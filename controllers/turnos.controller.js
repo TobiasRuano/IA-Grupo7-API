@@ -98,7 +98,7 @@ exports.generarTurnos = async function (req, res, next) {
     }
 }
 
-exports.removeTurno = async function (req, res, next) {
+exports.cancelarTurno = async function (req, res, next) {
 
     var id = req.params.id;
     try {

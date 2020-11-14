@@ -11,12 +11,12 @@ router.get('/test', function(req, res, next) {
 });
 router.post('/registration', UserController.createUser);
 router.post('/login/', UserController.loginUser);
-router.get('/', Authorization,UserController.getUsers);
+router.get('/', Authorization, UserController.getUsers);
 router.post('/userbydni', Authorization, UserController.getUsersByDni);
-router.get('/medicos',Authorization, UserController.getMedicos);
+router.get('/medicos', Authorization, UserController.getMedicos);
 router.put('/updateuser', Authorization, UserController.updateUser);
 router.delete('/:id', Authorization, UserController.removeUser);
-router.post('/guardarImgUser',UserController.guardarImagenUser);
+router.post('/guardarImgUser', UserController.guardarImagenUser);
 
 // Export the Router
 module.exports = router;
