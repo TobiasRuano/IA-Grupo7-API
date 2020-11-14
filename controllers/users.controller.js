@@ -23,7 +23,7 @@ exports.getUsersByDni = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
+    var limit = req.query.limit ? req.query.limit : 20;
     let filtro= {dni: req.body.dni}
     try {
         var Users = await UserService.getUsers(filtro, page, limit)
@@ -99,9 +99,9 @@ exports.updateUser = async function (req, res, next) {
 
 exports.removeUser = async function (req, res, next) {
 
-    var id = req.params.id;
+    var dni = req.body.dni;
     try {
-        var deleted = await UserService.deleteUser(id);
+        var deleted = await UserService.deleteUser(dni);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message})

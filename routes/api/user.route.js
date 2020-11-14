@@ -15,7 +15,7 @@ router.get('/', Authorization, UserController.getUsers);
 router.post('/userbydni', Authorization, UserController.getUsersByDni);
 router.get('/medicos', Authorization, UserController.getMedicos);
 router.put('/updateuser', Authorization, UserController.updateUser);
-router.delete('/:id', Authorization, UserController.removeUser);
+router.post('/remove', Authorization, UserController.removeUser);
 router.post('/guardarImgUser', UserController.guardarImagenUser);
 
 // Export the Router
