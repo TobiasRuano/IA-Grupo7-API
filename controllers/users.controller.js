@@ -76,15 +76,10 @@ exports.createUser = async function (req, res, next) {
 }
 
 exports.updateUser = async function (req, res, next) {
-
-    // Id is necessary for the update
-    if (!req.body.name) {
+    if (req.body.dni == null) {
         return res.status(400).json({status: 400., message: "Name be present"})
     }
-
-    
     var User = {
-       
         name: req.body.name ? req.body.name : null,
         email: req.body.email ? req.body.email : null,
         password: req.body.password ? req.body.password : null
