@@ -11,7 +11,7 @@ router.get('/test', function(req, res, next) {
 });
 router.post('/registration', UserController.createUser);
 router.post('/login/', UserController.loginUser);
-router.get('/', Authorization, UserController.getUsers);
+router.get('/allusers', Authorization, UserController.getUsers);
 router.post('/userbydni', Authorization, UserController.getUsersByDni);
 router.get('/medicos', Authorization, UserController.getMedicos);
 router.put('/updateuser', Authorization, UserController.updateUser);

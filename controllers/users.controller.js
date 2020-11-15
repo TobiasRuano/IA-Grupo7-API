@@ -9,7 +9,7 @@ exports.getUsers = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
     var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
+    var limit = req.query.limit ? req.query.limit : 100;
     try {
         var Users = await UserService.getUsers({}, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
@@ -107,7 +107,6 @@ exports.removeUser = async function (req, res, next) {
         return res.status(400).json({status: 400, message: e.message})
     }
 }
-
 
 exports.loginUser = async function (req, res, next) {
     // Req.Body contains the form submit values.
