@@ -80,6 +80,7 @@ exports.updateUser = async function (user) {
     oldUser.name = user.name
     oldUser.email = user.email
     oldUser.password = hashedPassword
+    oldUser.permiso = user.permiso
     try {
         var savedUser = await oldUser.save()
         return savedUser;
