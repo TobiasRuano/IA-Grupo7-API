@@ -13,6 +13,7 @@ router.put('/asignarturno', Authorization, TurnoController.asignarTurno);
 router.get('/', Authorization, TurnoController.getTurnos);
 router.post('/misturnos', Authorization, TurnoController.getTurnosbyID);
 router.put('/cancelarturno', Authorization, TurnoController.cancelarTurno);
+router.post('/disponibles', Authorization, TurnoController.getTurnosDisponiblesByMedico);
 
 // Export the Router
 module.exports = router;
