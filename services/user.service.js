@@ -76,9 +76,9 @@ exports.updateUser = async function (user) {
         return false;
     }
     //Edit the User Object
-    oldUser.name = user.name
-    oldUser.email = user.email
-    oldUser.permiso = user.permiso
+    oldUser.name = user.name ? user.name : oldUser.name
+    oldUser.email = user.email ? user.email : oldUser.email
+    oldUser.permiso = user.permiso ? user.permiso : oldUser.permiso
     try {
         var savedUser = await oldUser.save()
         return savedUser;
