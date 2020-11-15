@@ -80,6 +80,7 @@ exports.updateUser = async function (req, res, next) {
         return res.status(400).json({status: 400., message: "Name be present"})
     }
     var User = {
+        dni: req.body.dni ? req.body.dni : null,
         name: req.body.name ? req.body.name : null,
         email: req.body.email ? req.body.email : null,
         password: req.body.password ? req.body.password : null,
