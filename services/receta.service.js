@@ -51,46 +51,46 @@ exports.getRecetas = async function (query, page, limit) {
 // }
 // }
 
-exports.createReceta = async function (receta) {
+// exports.createReceta = async function (receta) {
    
-    //subir imagen a cloudinary
-    console.log("userImg",receta)
-    let urlImg;
-    let imagen = process.env.UPLOAD_DIR + receta.nombreImagen;
-    cloudinary.uploader.upload(imagen, function(result) { 
-        console.log("Resultado",result);
-        //urlImg=result.url;
+//     //subir imagen a cloudinary
+//     console.log("userImg",receta)
+//     let urlImg;
+//     let imagen = process.env.UPLOAD_DIR + receta.nombreImagen;
+//     cloudinary.uploader.upload(imagen, function(result) { 
+//         console.log("Resultado",result);
+//         //urlImg=result.url;
 
    
-    // Creating a new Mongoose Object by using the new keyword
-    var hashedIdr = bcrypt.hashSync(receta.id, 8);
+//     // Creating a new Mongoose Object by using the new keyword
+//     var hashedIdr = bcrypt.hashSync(receta.id, 8);
     
-    var newReceta = new Receta({
+//     var newReceta = new Receta({
 
-        id: hashedIdr,
-        fecha: new Date(),
-        nombreMedico: receta.nombreMedico,
-        comentario: receta.comentario,
-        userID: receta.userID,
-        nombreImagen: result.url
-    })
-    createReceta(newReceta);
-    try {
-        // Saving the User 
-        var savedReceta = await newReceta.save();
-        var token = jwt.sign({
-            id: savedReceta._id
-        }, process.env.SECRET, {
-            expiresIn: 86400 // expires in 24 hours
-        });
-        return token;
-    } catch (e) {
-        // return a Error message describing the reason 
-        console.log(e)    
-        throw Error("Error while Creating Receta")
-    }
-    });
-}
+//         id: hashedIdr,
+//         fecha: new Date(),
+//         nombreMedico: receta.nombreMedico,
+//         comentario: receta.comentario,
+//         userID: receta.userID,
+//         nombreImagen: result.url
+//     })
+//     createReceta(newReceta);
+//     try {
+//         // Saving the User 
+//         var savedReceta = await newReceta.save();
+//         var token = jwt.sign({
+//             id: savedReceta._id
+//         }, process.env.SECRET, {
+//             expiresIn: 86400 // expires in 24 hours
+//         });
+//         return token;
+//     } catch (e) {
+//         // return a Error message describing the reason 
+//         console.log(e)    
+//         throw Error("Error while Creating Receta")
+//     }
+//     });
+// }
 
 exports.deleteReceta = async function (id) {
 
