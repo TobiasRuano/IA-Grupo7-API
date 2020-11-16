@@ -10,7 +10,7 @@ _this = this
 var cloudinary = require('cloudinary');
 const { createReceta } = require('../controllers/recetas.controller');
 cloudinary.config({ 
-    cloud_name: 'grupo7api', //reemplazar con sus credenciales
+    cloud_name: 'grupo7api',
     api_key: '584667234883821', 
     api_secret: 'Nq4gFX3J1Yzsm96g0_sNdVkC0LU'
 })
@@ -37,20 +37,19 @@ exports.getRecetas = async function (query, page, limit) {
 }
 
 //carga la imagen a mongo
-async function createReceta (newReceta)
-{
+// async function createReceta (newReceta) {
 
-    try {
-        // Saving the Control 
-        var savedReceta = await newReceta.save();
+//     try {
+//         // Saving the Control 
+//         var savedReceta = await newReceta.save();
         
-        return savedReceta;
-    } catch (e) {
-        // return a Error message describing the reason 
-    console.log(e)    
-    throw Error("Error while Creating Imagen User")
-}
-}
+//         return savedReceta;
+//     } catch (e) {
+//         // return a Error message describing the reason 
+//     console.log(e)    
+//     throw Error("Error while Creating Imagen User")
+// }
+// }
 
 exports.createReceta = async function (receta) {
    
