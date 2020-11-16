@@ -12,6 +12,8 @@ router.get('/test', function(req, res, next) {
 router.post('/nuevareceta', RecetaController.createReceta)
 router.post('/misrecetas', Authorization, RecetaController.getRecetasByID)
 router.delete('/:id', Authorization, RecetaController.removeReceta)
+router.post('/uploadfiles',RecetaController.uploadFiles)//subir imagen/archivo
+router.get('/recetas:nombreImagen',RecetaController.downloadFiles)//descargar imagen/archivo
 
 //subir imagen/archivo
 

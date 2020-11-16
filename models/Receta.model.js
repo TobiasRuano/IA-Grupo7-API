@@ -7,8 +7,8 @@ var RecetaSchema = new mongoose.Schema({
     fecha: Date,
     nombreMedico:String,
     comentario: String,
-    userID: Number
-    //imagen: de la receta
+    userID: Number,
+    nombreImagen:String,
 })
 
 RecetaSchema.plugin(mongoosePaginate)

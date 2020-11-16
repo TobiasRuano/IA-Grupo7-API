@@ -6,6 +6,15 @@ var jwt = require('jsonwebtoken');
 // Saving the context of this module inside the _the variable
 _this = this
 
+//configurar cloudinary
+var cloudinary = require('cloudinary');
+const { createReceta } = require('../controllers/recetas.controller');
+cloudinary.config({ 
+    cloud_name: 'grupo7api', //reemplazar con sus credenciales
+    api_key: '584667234883821', 
+    api_secret: 'Nq4gFX3J1Yzsm96g0_sNdVkC0LU'
+})
+
 // Async function to get the User List
 exports.getRecetas = async function (query, page, limit) {
 
@@ -27,7 +36,33 @@ exports.getRecetas = async function (query, page, limit) {
     }
 }
 
+//carga la imagen a mongo
+async function createReceta (newReceta)
+{
+
+    try {
+        // Saving the Control 
+        var savedReceta = await newReceta.save();
+        
+        return savedReceta;
+    } catch (e) {
+        // return a Error message describing the reason 
+    console.log(e)    
+    throw Error("Error while Creating Imagen User")
+}
+}
+
 exports.createReceta = async function (receta) {
+   
+    //subir imagen a cloudinary
+    console.log("userImg",receta)
+    let urlImg;
+    let imagen = process.env.UPLOAD_DIR + receta.nombreImagen;
+    cloudinary.uploader.upload(imagen, function(result) { 
+        console.log("Resultado",result);
+        //urlImg=result.url;
+
+   
     // Creating a new Mongoose Object by using the new keyword
     var hashedIdr = bcrypt.hashSync(receta.id, 8);
     
@@ -37,11 +72,10 @@ exports.createReceta = async function (receta) {
         fecha: new Date(),
         nombreMedico: receta.nombreMedico,
         comentario: receta.comentario,
-        userID: receta.userID
-        //imagenReceta:receta.imagenReceta
-
+        userID: receta.userID,
+        nombreImagen: result.url
     })
-
+    createReceta(newReceta);
     try {
         // Saving the User 
         var savedReceta = await newReceta.save();
@@ -56,6 +90,7 @@ exports.createReceta = async function (receta) {
         console.log(e)    
         throw Error("Error while Creating Receta")
     }
+    });
 }
 
 exports.deleteReceta = async function (id) {
@@ -73,6 +108,81 @@ exports.deleteReceta = async function (id) {
         throw Error("Error Occured while Deleting the Receta")
     }
 }
+
+// Async function to get the Image List
+exports.getImagenesByUser = async function (query, page, limit) {
+
+    // Options setup for the mongoose paginate
+    var options = {
+        page,
+        limit
+    }
+    // Try Catch the awaited promise to handle the error 
+    console.log("byDni",query)
+    try {
+        var RecetaImagenes = await Receta.paginate(query, options)
+        // Return the Control list that was retured by the mongoose promise
+        console.log("imagenes by dni",RecetaImagenes)
+        return RecetaImagenes;
+
+    } catch (e) {
+        // return a Error message describing the reason 
+        throw Error('Error while Paginating Imagen');
+    }
+}
+
+// exports.createReceta = async function (receta) {
+//     // Creating a new Mongoose Object by using the new keyword
+//     var hashedIdr = bcrypt.hashSync(receta.id, 8);
+    
+
+    
+//     var newReceta = new Receta({
+
+//         id: hashedIdr,
+//         fecha: new Date(),
+//         nombreMedico: receta.nombreMedico,
+//         comentario: receta.comentario,
+//         userID: receta.userID,
+//         imagenReceta:receta.imagenReceta
+
+//     })
+
+//     try {
+//         // Saving Receta
+//         var savedReceta = await newReceta.save();
+//         var token = jwt.sign({
+//             id: savedReceta._id
+//         }, process.env.SECRET, {
+//             expiresIn: 86400 // expires in 24 hours
+//         });
+//         return token;
+//     } catch (e) {
+//         // return a Error message describing the reason 
+//         console.log(e)    
+//         throw Error("Error while Creating Receta")
+//     }
+// }
+// // Async function to get the Image List
+// exports.getImagenes = async function (query, page, limit) {
+
+//     // Options setup for the mongoose paginate
+//     var options = {
+//         page,
+//         limit
+//     }
+//     // Try Catch the awaited promise to handle the error 
+//     try {
+//         var Imagenes = await Receta.paginate(query, options)
+//         // Return the Contact list that was retured by the mongoose promise
+//         return Imagenes;
+
+//     } catch (e) {
+//         // return a Error message describing the reason 
+//         throw Error('Error while Paginating Contacts');
+//     }
+// }
+
 
 
 // exports.updateUser = async function (user) {
@@ -100,4 +210,4 @@ exports.deleteReceta = async function (id) {
 //     } catch (e) {
 //         throw Error("And Error occured while updating the User");
 //     }
-// } // esto es de user hay que modificarlo para receta
+// } // esto es de user hay que modificarlo para receta. En principio no esta la funcion de modificar en recetas.
