@@ -7,34 +7,33 @@ var jwt = require('jsonwebtoken');
 _this = this
 
 //configurar cloudinary
-var cloudinary = require('cloudinary');
-const { createReceta } = require('../controllers/recetas.controller');
-cloudinary.config({ 
-    cloud_name: 'grupo7api',
-    api_key: '584667234883821', 
-    api_secret: 'Nq4gFX3J1Yzsm96g0_sNdVkC0LU'
-})
+// var cloudinary = require('cloudinary');
+// const { createReceta } = require('../controllers/recetas.controller');
+// cloudinary.config({ 
+//     cloud_name: 'grupo7api',
+//     api_key: '584667234883821', 
+//     api_secret: 'Nq4gFX3J1Yzsm96g0_sNdVkC0LU'
+// })
 
-// Async function to get the User List
-exports.getRecetas = async function (query, page, limit) {
+// exports.getRecetas = async function (query, page, limit) {
 
-    // Options setup for the mongoose paginate
-    var options = {
-        page,
-        limit
-    }
-    // Try Catch the awaited promise to handle the error 
-    try {
-        console.log("Query",query)
-        var Recetas = await Receta.paginate(query, options)
-        // Return the Userd list that was retured by the mongoose promise
-        return Recetas;
+//     // Options setup for the mongoose paginate
+//     var options = {
+//         page,
+//         limit
+//     }
+//     // Try Catch the awaited promise to handle the error 
+//     try {
+//         console.log("Query",query)
+//         var Recetas = await Receta.paginate(query, options)
+//         // Return the Userd list that was retured by the mongoose promise
+//         return Recetas;
 
-    } catch (e) {
-        // return a Error message describing the reason 
-        throw Error('Error while Paginating Recetas');
-    }
-}
+//     } catch (e) {
+//         // return a Error message describing the reason 
+//         throw Error('Error while Paginating Recetas');
+//     }
+// }
 
 //carga la imagen a mongo
 // async function createReceta (newReceta) {
@@ -92,43 +91,42 @@ exports.getRecetas = async function (query, page, limit) {
 //     });
 // }
 
-exports.deleteReceta = async function (id) {
+// exports.deleteReceta = async function (id) {
 
-    // Delete the Receta
-    try {
-        var deleted = await Receta.remove({
-            _id: id
-        })
-        if (deleted.n === 0 && deleted.ok === 1) {
-            throw Error("User Could not be deleted")
-        }
-        return deleted;
-    } catch (e) {
-        throw Error("Error Occured while Deleting the Receta")
-    }
-}
+//     // Delete the Receta
+//     try {
+//         var deleted = await Receta.remove({
+//             _id: id
+//         })
+//         if (deleted.n === 0 && deleted.ok === 1) {
+//             throw Error("User Could not be deleted")
+//         }
+//         return deleted;
+//     } catch (e) {
+//         throw Error("Error Occured while Deleting the Receta")
+//     }
+// }
 
-// Async function to get the Image List
-exports.getImagenesByUser = async function (query, page, limit) {
+// exports.getImagenesByUser = async function (query, page, limit) {
 
-    // Options setup for the mongoose paginate
-    var options = {
-        page,
-        limit
-    }
-    // Try Catch the awaited promise to handle the error 
-    console.log("byDni",query)
-    try {
-        var RecetaImagenes = await Receta.paginate(query, options)
-        // Return the Control list that was retured by the mongoose promise
-        console.log("imagenes by dni",RecetaImagenes)
-        return RecetaImagenes;
+//     // Options setup for the mongoose paginate
+//     var options = {
+//         page,
+//         limit
+//     }
+//     // Try Catch the awaited promise to handle the error 
+//     console.log("byDni",query)
+//     try {
+//         var RecetaImagenes = await Receta.paginate(query, options)
+//         // Return the Control list that was retured by the mongoose promise
+//         console.log("imagenes by dni",RecetaImagenes)
+//         return RecetaImagenes;
 
-    } catch (e) {
-        // return a Error message describing the reason 
-        throw Error('Error while Paginating Imagen');
-    }
-}
+//     } catch (e) {
+//         // return a Error message describing the reason 
+//         throw Error('Error while Paginating Imagen');
+//     }
+// }
 
 // exports.createReceta = async function (receta) {
 //     // Creating a new Mongoose Object by using the new keyword
