@@ -33,7 +33,7 @@ exports.createHistoriaClinica = async function (req, res, next) {
         alergias: req.body.alergias,
         antecendentes: req.body.antecendentes,
         evolucion: req.body.evolucion,
-        dnipaciente: req.body.dnipaciente
+        dnipaciente: req.body.dnipaciente        
     }
     try {
         // Calling the Service function with the new object from the Request Body
@@ -41,6 +41,7 @@ exports.createHistoriaClinica = async function (req, res, next) {
         return res.status(201).json({createdHistoriaClinica, message: "Se creó la HistoriaClinica con exito"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
+        console.log(req.body.motivo,req.body.gruposang,req.body.cardiaco,req.body.diabetes,req.body.hiperten,req.body.alergias,req.body.antecendentes,req.body.evolucion,req.body.dnipaciente)
         console.log(e)
         return res.status(400).json({status: 400, message: "Error al crear la HistoriaClinica"})
     }
@@ -48,7 +49,7 @@ exports.createHistoriaClinica = async function (req, res, next) {
 
 exports.removeHistoriaClinica = async function (req, res, next) {
 
-    var id = req.params.id;
+    var id = req.params.dnipaciente;
     try {
         var deleted = await HistoriaClinicaService.deleteHistoriaClinica(id);
         res.status(200).send("HistoriaClinica Borrada! ");

@@ -3,6 +3,7 @@ var mongoosePaginate = require('mongoose-paginate')
 
 
 var HistoriaClinicaSchema = new mongoose.Schema({
+  //  id: String,
     motivo: String,
     gruposang: String,
     cardiaco: String, 
@@ -11,7 +12,7 @@ var HistoriaClinicaSchema = new mongoose.Schema({
     alergias: String,
     antecendentes: String,
     evolucion: String,
-    dnipaciente: String
+    dnipaciente: Number
 })
 
 HistoriaClinicaSchema.plugin(mongoosePaginate)

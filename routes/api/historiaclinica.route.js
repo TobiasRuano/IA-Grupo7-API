@@ -10,7 +10,7 @@ router.get('/test', function(req, res, next) {
 });
 
 router.post('/nuevahistoriaclinica', HistoriaClinicaController.createHistoriaClinica)
-router.post('/obtenerhistoriaclinica', Authorization, HistoriaClinicaController.getHistoriaClinicasByID)
+router.post('/obtenerhistoriaclinica', HistoriaClinicaController.getHistoriaClinicasByID)
 router.delete('/:id', Authorization, HistoriaClinicaController.removeHistoriaClinica)
 
 // Export the Router

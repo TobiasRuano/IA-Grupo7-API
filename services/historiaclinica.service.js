@@ -29,9 +29,10 @@ exports.getHistoriaClinica = async function (query, page, limit) {
 
 exports.createHistoriaClinica = async function (historiaclinica) {
     // Creating a new Mongoose Object by using the new keyword
-    var hashedIdr = bcrypt.hashSync(historiaclinica.id, 8);
+ //   var hashedIdr = bcrypt.hashSync(historiaclinica.id, 8);
     
     var newHistoriaClinica = new HistoriaClinica({
+ //       id: hashedIdr,
         motivo: historiaclinica.motivo,
         gruposang: historiaclinica.gruposang,
         cardiaco: historiaclinica.cardiaco,
@@ -40,7 +41,7 @@ exports.createHistoriaClinica = async function (historiaclinica) {
         alergias: historiaclinica.alergias,
         antecendentes: historiaclinica.antecedentes,
         evolucion: historiaclinica.evolucion,
-        dnipaciente: historiaclinica.dnipaciente,
+        dnipaciente: historiaclinica.dnipaciente
     })
 
     try {
