@@ -85,6 +85,8 @@ exports.updateUser = async function (req, res, next) {
         email: req.body.email != null ? req.body.email : null,
         permiso: req.body.permiso != null ? req.body.permiso : null
     }
+    console.log("Este es el nombre que tengo en user:" , User.name);
+    console.log("Esto es lo que viene del front:" , req.body.nombre);
     try {
         var updatedUser = await UserService.updateUser(User)
         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
