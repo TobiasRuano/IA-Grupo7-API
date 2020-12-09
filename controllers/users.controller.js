@@ -80,10 +80,10 @@ exports.updateUser = async function (req, res, next) {
         return res.status(400).json({status: 400., message: "Name be present"})
     }
     var User = {
-        dni: req.body.dni ? req.body.dni : null,
-        name: req.body.nombre ? req.body.nombre : null,
-        email: req.body.email ? req.body.email : null,
-        permiso: req.body.permiso ? req.body.permiso : null
+        dni: req.body.dni != null ? req.body.dni : null,
+        name: req.body.nombre != null ? req.body.nombre : null,
+        email: req.body.email != null ? req.body.email : null,
+        permiso: req.body.permiso != null ? req.body.permiso : null
     }
     try {
         var updatedUser = await UserService.updateUser(User)
