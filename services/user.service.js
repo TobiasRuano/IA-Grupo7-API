@@ -76,16 +76,16 @@ exports.updateUser = async function (user) {
         return false;
     }
     //Edit the User Object
-    if (user.email != null) {
+    if (user.email != "null") {
         oldUser.email = user.email
     }
-    if (user.name != null) {
+    if (user.name != "null") {
         oldUser.name = user.name
     }
-    if (user.permiso != null) {
+    if (user.permiso != "null") {
         oldUser.permiso = user.permiso
     }
-    if (user.dni != null) {
+    if (user.dni != "null") {
         oldUser.dni = user.dni
     }
 
