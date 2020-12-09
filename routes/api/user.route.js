@@ -2,7 +2,6 @@ var express = require('express')
 var router = express.Router()
 var UserController = require('../../controllers/users.controller');
 var Authorization = require('../../auth/authorization');
-const User = require('../../models/User.model');
 
 
 // Authorize each API with middleware and map to the Controller Functions
