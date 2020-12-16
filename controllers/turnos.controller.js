@@ -104,7 +104,8 @@ exports.cancelarTurno = async function (req, res, next) {
         razon: "",
         fecha: req.body.fecha,
         dniMedico: req.body.dniMedico,
-        estado: "disponible"
+        medico: req.body.medico,
+        estado: "Disponible"
     }
     try {
         var createdTurno = await TurnoService.actualizarTurno(Turno)
