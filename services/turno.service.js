@@ -51,6 +51,7 @@ exports.createTurno = async function (turno) {
 
 exports.actualizarTurno = async function (turno) {
     var id = {id :turno.id}
+    console.log("Esto es ID: ", id);
 
     try {
         var oldTurno = await Turno.findOne(id);
@@ -58,6 +59,7 @@ exports.actualizarTurno = async function (turno) {
         throw Error("Error al intentar encontrar el turno")
     }
     if (oldTurno == null) {
+        console.log("esto es lo que devuelve oldTurno: ", oldTurno);
         return false;
     }
     oldTurno.id = turno.id
