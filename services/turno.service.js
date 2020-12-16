@@ -31,6 +31,7 @@ exports.getTurnos = async function (query, page, limit) {
 exports.createTurno = async function (turno) {
 
     var newTurno = new Turno({
+        id: bcrypt.hashSync(turno.dniMedico, 16),
         userID: turno.userID,
         razon: turno.razon,
         fecha: turno.fecha,
@@ -40,7 +41,6 @@ exports.createTurno = async function (turno) {
     })
 
     try {
-        // Guardando el turno
         var savedTurno = await newTurno.save();
         return true;
     } catch (e) {
