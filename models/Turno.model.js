@@ -7,6 +7,7 @@ var TurnoSchema = new mongoose.Schema({
     razon: String,
     fecha: Date,
     dniMedico: Number,
+    medico: String,
     estado: String,
     userID: Number
 })

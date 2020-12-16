@@ -34,6 +34,7 @@ exports.createTurno = async function (turno) {
         userID: turno.userID,
         razon: turno.razon,
         fecha: turno.fecha,
+        medico: turno.medico,
         dniMedico: turno.dniMedico,
         estado: turno.estado
     })
@@ -56,12 +57,13 @@ exports.actualizarTurno = async function (turno) {
     } catch (e) {
         throw Error("Error al intentar encontrar el turno")
     }
-    if (!oldTurno) {
+    if (oldTurno == null) {
         return false;
     }
     oldTurno.id = turno.id
     oldTurno.razon = turno.razon
     oldTurno.fecha = turno.fecha
+    oldTurno.medico = turno.medico
     oldTurno.dniMedico = turno.dniMedico
     oldTurno.estado = turno.estado
     oldTurno.userID = turno.userID

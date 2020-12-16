@@ -42,6 +42,7 @@ exports.asignarTurno = async function (req, res, next) {
         userID: req.body.userID,
         razon: req.body.razon,
         fecha: req.body.fecha,
+        medico: req.body.medico,
         dniMedico: req.body.dniMedico,
         estado: req.body.estado
     }
@@ -56,6 +57,7 @@ exports.asignarTurno = async function (req, res, next) {
 
 exports.generarTurnos = async function (req, res, next) {
     var fecha = new Date(req.body.fecha);
+    var medico = req.body.medico;
     var dniMedico = req.body.dniMedico;
     let arrayTurnos = [];
 
@@ -68,6 +70,7 @@ exports.generarTurnos = async function (req, res, next) {
             userID: "",
             razon: "",
             fecha: fechaTurno,
+            medico: medico,
             dniMedico: dniMedico,
             estado: "Disponible"
         }
