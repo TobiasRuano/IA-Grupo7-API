@@ -88,6 +88,15 @@ exports.updateUser = async function (user) {
     if (user.dni != "null") {
         oldUser.dni = user.dni
     }
+    if (user.sexo != "null") {
+        oldUser.sexo = user.sexo
+    }
+    if (user.domicilio != "null") {
+        oldUser.domicilio = user.domicilio
+    }
+    if (user.telefono != "null") {
+        oldUser.telefono = user.telefono
+    }
 
     try {
         var savedUser = await oldUser.save()
