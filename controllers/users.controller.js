@@ -92,9 +92,9 @@ exports.updateUser = async function (req, res, next) {
     try {
         var updatedUser = await UserService.updateUser(User)
         let data = {
-            destinatario = User.email,
-            asunto = "Usuario Actualizado correctamente",
-            cuerpo = "Algunos de tus datos fueron actualizados. Si no fue usted, cambie la contrasena inmediatamente!"
+            destinatario: User.email,
+            asunto: "Usuario Actualizado correctamente",
+            cuerpo: "Algunos de tus datos fueron actualizados. Si no fue usted, cambie la contrasena inmediatamente!"
         }
         MailController.sendEmail(data)
         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
