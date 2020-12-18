@@ -1,5 +1,6 @@
 var TurnoService = require('../services/turno.service');
 var User = require('../models/User.model');
+var MailController = require('../controllers/mail.controller');
 
 // Saving the context of this module inside the _the variable
 _this = this;
