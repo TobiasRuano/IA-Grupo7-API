@@ -4,13 +4,15 @@ exports.sendEmail = async function (data){
     
     // Definimos el transporter
     var transporter = nodemailer.createTransport({
-        //host: 'svp-02715.fibercorp.local',
-        //secure: false,
-        port:25,
-        service: 'hotmail',
+        host: "smtp-mail.outlook.com", // hostname
+        secureConnection: false, // TLS requires secureConnection to be false
+        port:587,
         auth: {
             user: 'ruano_t@outlook.com',
             pass: 'xAfLeRRCTDnuBCMsTBNzsCMD'
+        },
+        tls: {
+            ciphers:'SSLv3'
         }
      });
     // Definimos el email
