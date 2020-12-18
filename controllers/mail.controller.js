@@ -9,7 +9,7 @@ exports.sendEmail = async function (data){
         port:587,
         auth: {
             user: 'ruano_t@outlook.com',
-            pass: 'xAfLeRRCTDnuBCMsTBNzsCMD'
+            pass: 'cyytaaqgnrghxlah'
         },
         tls: {
             ciphers:'SSLv3'
