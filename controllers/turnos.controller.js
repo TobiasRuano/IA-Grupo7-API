@@ -49,7 +49,7 @@ exports.asignarTurno = async function (req, res, next) {
     }
     try {
         var createdTurno = await TurnoService.actualizarTurno(Turno)
-        var user = await User.findOne(Turno.userID);
+        var user = await User.findOne(req.body.userID);
         let data = {
             destinatario: user.email,
             asunto: "Turno asignado correctamente",
@@ -117,7 +117,7 @@ exports.cancelarTurno = async function (req, res, next) {
     }
     try {
         var turnoCancelado = await TurnoService.actualizarTurno(Turno)
-        var user = await User.findOne(Turno.userID);
+        var user = await User.findOne(req.body.userID);
         let data = {
             destinatario: user.email,
             asunto: "Turno cancelado correctamente",
