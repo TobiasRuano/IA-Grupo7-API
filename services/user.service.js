@@ -111,7 +111,7 @@ exports.deleteUser = async function (dni) {
     // Delete the User
     try {
         var id = {dni :dni}
-        var user = await User.findOne(dni);
+        var user = await User.findOne(id);
         var deleted = await User.remove({
             dni: dni
         })
