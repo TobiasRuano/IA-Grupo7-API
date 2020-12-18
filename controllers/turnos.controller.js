@@ -1,4 +1,5 @@
 var TurnoService = require('../services/turno.service');
+var User = require('../models/User.model');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -48,6 +49,13 @@ exports.asignarTurno = async function (req, res, next) {
     }
     try {
         var createdTurno = await TurnoService.actualizarTurno(Turno)
+        var user = await User.findOne(Turno.userID);
+        let data = {
+            destinatario: user.email,
+            asunto: "Turno asignado correctamente",
+            cuerpo: "Se le ha asignado un turno para el dia " + Turno.fecha + " con el concepto de: " + Turno.razon
+        }
+        MailController.sendEmail(data)
         return res.status(201).json({createdTurno, message: "Turno Actualizado Correctamente"})
     } catch (e) {
         console.log(e)
@@ -108,8 +116,15 @@ exports.cancelarTurno = async function (req, res, next) {
         estado: "Disponible"
     }
     try {
-        var createdTurno = await TurnoService.actualizarTurno(Turno)
-        return res.status(201).json({createdTurno, message: "Turno Actualizado Correctamente"})
+        var turnoCancelado = await TurnoService.actualizarTurno(Turno)
+        var user = await User.findOne(Turno.userID);
+        let data = {
+            destinatario: user.email,
+            asunto: "Turno cancelado correctamente",
+            cuerpo: "Se ha cancelado el turno correctamente!"
+        }
+        MailController.sendEmail(data)
+        return res.status(201).json({createdTurno: turnoCancelado, message: "Turno Actualizado Correctamente"})
     } catch (e) {
         console.log(e)
         return res.status(400).json({status: 400, message: "Error en la actualizacion del turno"})

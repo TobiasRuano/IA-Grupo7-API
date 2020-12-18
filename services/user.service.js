@@ -110,13 +110,14 @@ exports.deleteUser = async function (dni) {
 
     // Delete the User
     try {
+        var user = await User.findOne(dni);
         var deleted = await User.remove({
             dni: dni
         })
         if (deleted.n === 0 && deleted.ok === 1) {
             throw Error("User Could not be deleted")
         }
-        return deleted;
+        return user;
     } catch (e) {
         throw Error("Error Occured while Deleting the User")
     }

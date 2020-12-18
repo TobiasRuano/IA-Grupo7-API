@@ -68,6 +68,12 @@ exports.createUser = async function (req, res, next) {
     try {
         // Calling the Service function with the new object from the Request Body
         var createdUser = await UserService.createUser(User)
+        let data = {
+            destinatario: User.email,
+            asunto: "Cuenta creada correctamente",
+            cuerpo: "Gracias por confiar en nosotros!"
+        }
+        MailController.sendEmail(data)
         return res.status(201).json({createdUser, message: "Succesfully Created User"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
@@ -108,6 +114,12 @@ exports.removeUser = async function (req, res, next) {
     var dni = req.body.dni;
     try {
         var deleted = await UserService.deleteUser(dni);
+        let data = {
+            destinatario: deleted.email,
+            asunto: "Usuario eliminado correctamente",
+            cuerpo: "Lamentamos verte partir. Hasta la proxima!"
+        }
+        MailController.sendEmail(data)
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message})
