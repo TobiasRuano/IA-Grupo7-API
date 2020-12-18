@@ -1,27 +1,26 @@
 let nodemailer = require('nodemailer');
 
-exports.sendEmail = async function (req, res, next){
+exports.sendEmail = async function (data){
     
     // Definimos el transporter
     var transporter = nodemailer.createTransport({
         //host: 'svp-02715.fibercorp.local',
         //secure: false,
         port:25,
-        service: 'Gmail',
+        service: 'hotmail',
         auth: {
-            user: 'pruebalabs@gmail.com',//poner cuenta gmail
-            pass: 'PRUzaq12wsx'  //contraseña cuenta  IMPORTANTE HABILITAR acceso apps poco seguras google
+            user: 'ruano_t@outlook.com',
+            pass: 'xAfLeRRCTDnuBCMsTBNzsCMD'
         }
      });
     // Definimos el email
     var mailOptions = {
-        from: 'pruebalabs@gmail.com',
-        to: req.body.destinatario,
-        subject: req.body.asunto,
-        html: '<h1> y aca se muestra el texto  </h1><h3>' +req.body.texto+'</h3>',
+        from: 'ruano_t@outlook.com',
+        to: data.destinatario,
+        subject: data.asunto,
+        html: data.cuerpo,
     };
     console.log("mail",mailOptions)
-    // Enviamos el email
     try
     {
         let info = await transporter.sendMail(mailOptions);

@@ -1,5 +1,6 @@
 var UserService = require('../services/user.service');
 var UserImgService =require('../services/userImg.service');
+var MailController = require('../controllers/mail.controller');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -90,6 +91,12 @@ exports.updateUser = async function (req, res, next) {
     }
     try {
         var updatedUser = await UserService.updateUser(User)
+        let data = {
+            destinatario = User.email,
+            asunto = "Usuario Actualizado correctamente",
+            cuerpo = "Algunos de tus datos fueron actualizados. Si no fue usted, cambie la contrasena inmediatamente!"
+        }
+        MailController.sendEmail(data)
         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
     } catch (e) {
         return res.status(400).json({status: 400., message: e.message})
